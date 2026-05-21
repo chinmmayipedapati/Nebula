@@ -167,8 +167,13 @@ function renderAppFrame() {
     <!-- Top Header Sticky -->
     <header class="main-header">
       <div class="title">NEBULA</div>
-      <div class="profile-badge" id="profile-badge-sign">
-        ${state.chart.placements.sun.symbol} ${state.chart.placements.sun.sign}
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <div class="profile-badge" id="profile-badge-sign">
+          ${state.chart.placements.sun.symbol} ${state.chart.placements.sun.sign}
+        </div>
+        <button id="btn-logout" class="cosmic-btn" style="padding: 6px 12px; font-size: 12px; min-height: auto; background: rgba(255, 77, 77, 0.1); border: 1px solid rgba(255, 77, 77, 0.3); color: #ff4d4d; box-shadow: none;">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
       </div>
     </header>
     
@@ -318,6 +323,16 @@ function renderAppFrame() {
 
   // Bind Compatibility Trigger
   document.getElementById('btn-run-compatibility').addEventListener('click', runCompatibilityTest);
+
+  // Bind Logout
+  document.getElementById('btn-logout').addEventListener('click', () => {
+    localStorage.removeItem('nebula_astro_profile');
+    state.profile = null;
+    state.chart = null;
+    state.chatProcessor = null;
+    state.chatHistory = [];
+    renderOnboarding();
+  });
 }
 
 // 3. ROUTER / TAB SWITCHER
